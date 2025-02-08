@@ -1,20 +1,48 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="./src/style.css">
+    
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app">
-      <div class="logo-container">
-      
-      </div>
-    </div>
+    
+    <title>Film Review JS</title>
+</head>
+
+<body>
+    <header>
+        <div id="logos">
+        </div>
+    </header>
+    
+    <main>
+        <div>
+            <form>
+                <input id="movie-title" type="text" placeholder="Movie Title" />
+                <label for="movie-title"></label>
+                
+                <input id="movie-genre" type="text" placeholder="Movie Genre" />
+                <label for="movie-genre"></label>
+                
+                <input id="movie-rating" type="text" placeholder="Rating (1-5)" />
+                <label for="movie-rating"></label>
+                
+                <textarea id="review-form" placeholder="Enter your review..."></textarea>
+                <label for="review-form"></label>
+            </form>
+        </div>
+        <div class="card">
+            <button id="submit" type="button">Push that thang</button>
+        </div>
+        <div class="reviews-feed" id="reviews-feed">
+            <!-- Reviews Populate Here!! -->
+        </div>
+    </main>
+    
     <script type="module" src="/src/main.js"></script>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-  </body>
+
+</body>
 </html>
+
