@@ -16,33 +16,45 @@
         <div id="logos">
         </div>
     </header>
+    <div>
+        <form id="review-form">
+            <label for="movie-title">Movie Title:</label>
+            <input id="movie-title"
+                   type="text"
+                   name="movie-title"
+                   placeholder="Movie Title"
+                   required/>
+            <label for="movie-genre">Movie Genre:</label>
+            <select id="movie-genre" name="movie-genre" required>
+                <option value="" disabled selected>Select Genre</option>
+                <option value="Action">Action</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Drama">Drama</option>
+                <option value="Sci-Fi">Sci-Fi</option>
+            </select>
+            <label for="movie-rating">Movie Rating</label>
+            <input id="movie-rating"
+                   type="number"
+                   name="movie-rating"
+                   min="1"
+                   max="5"
+                   placeholder="Rating (1-5)✨"
+                   required/>
+            <label for="movie-text">Review:</label>
+            <textarea id="movie-text"
+                      name="movie-text"
+                      placeholder="Enter your review..."
+                      required></textarea>
+            <div class="card">
+                <button id="submit" type="submit">Push that thang</button>
+            </div>
+        </form>
+    </div>
     
-    <main>
-        <div>
-            <form>
-                <input id="movie-title" type="text" placeholder="Movie Title" />
-                <label for="movie-title"></label>
-                
-                <input id="movie-genre" type="text" placeholder="Movie Genre" />
-                <label for="movie-genre"></label>
-                
-                <input id="movie-rating" type="text" placeholder="Rating (1-5)" />
-                <label for="movie-rating"></label>
-                
-                <textarea id="review-form" placeholder="Enter your review..."></textarea>
-                <label for="review-form"></label>
-            </form>
-        </div>
-        <div class="card">
-            <button id="submit" type="button">Push that thang</button>
-        </div>
-        <div class="reviews-feed" id="reviews-feed">
-            <!-- Reviews Populate Here!! -->
-        </div>
-    </main>
-    
+    <div id="review-list">
+        <!-- Reviews Populate Here!! -->
+    </div>
     <script type="module" src="/src/main.js"></script>
-
 </body>
 </html>
 

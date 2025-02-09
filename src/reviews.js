@@ -1,20 +1,20 @@
 export const reviews = [
     {
-        title: "Action Movie Extravaganza",
+        title: "Aliens",
         genre: "Action",
         rating: "4",
         review: "A non-stop thrill ride! Explosions, car chases, and incredible stunts. The plot was a bit thin, but who cares when the action is this good?"
     },
     {
-        title: "Romantic Comedy Delight",
+        title: "An early career Matthew McConeghey vehicle",
         genre: "Comedy",
         rating: "5",
         review: "A charming and hilarious rom-com. The leads had great chemistry, and the jokes were genuinely funny. Perfect for a feel-good movie night."
     },
     {
-        title: "Intense Psychological Thriller",
+        title: "Cape Fear",
         genre: "Thriller",
-        rating: "4",
+        rating: "5",
         review: "Kept me on the edge of my seat the whole time. The twists and turns were unexpected, and the acting was top-notch. A must-see for thriller fans."
     },
     {

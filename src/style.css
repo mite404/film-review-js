@@ -70,13 +70,14 @@ button:hover {
 
 /* Review List Styles */
 #review-list {
-    display: grid; /* Use grid for layout */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive columns */
+    display: none; /* Use grid for layout */
+    grid-template-columns: repeat(3, 1fr); /* Responsive columns */
     gap: 20px; /* Spacing between cards */
 }
 
 .film-item {
-    background-color: #fff;
+    background-color: #7e7e7e;
+    align-content: center;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
