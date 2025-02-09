@@ -1,20 +1,60 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="./src/style.css">
+    
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app">
-      <div class="logo-container">
-      
-      </div>
+    
+    <title>Film Review JS</title>
+</head>
+
+<body>
+    <header>
+        <div id="logos">
+        </div>
+    </header>
+    <div>
+        <form id="review-form">
+            <label for="movie-title">Movie Title:</label>
+            <input id="movie-title"
+                   type="text"
+                   name="movie-title"
+                   placeholder="Movie Title"
+                   required/>
+            <label for="movie-genre">Movie Genre:</label>
+            <select id="movie-genre" name="movie-genre" required>
+                <option value="" disabled selected>Select Genre</option>
+                <option value="Action">Action</option>
+                <option value="Comedy">Comedy</option>
+                <option value="Drama">Drama</option>
+                <option value="Sci-Fi">Sci-Fi</option>
+            </select>
+            <label for="movie-rating">Movie Rating</label>
+            <input id="movie-rating"
+                   type="number"
+                   name="movie-rating"
+                   min="1"
+                   max="5"
+                   placeholder="Rating (1-5)✨"
+                   required/>
+            <label for="movie-text">Review:</label>
+            <textarea id="movie-text"
+                      name="movie-text"
+                      placeholder="Enter your review..."
+                      required></textarea>
+            <div class="card">
+                <button id="submit" type="submit">Push that thang</button>
+            </div>
+        </form>
+    </div>
+    
+    <div id="review-list">
+        <!-- Reviews Populate Here!! -->
     </div>
     <script type="module" src="/src/main.js"></script>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-  </body>
+</body>
 </html>
+
