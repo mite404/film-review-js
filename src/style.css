@@ -1,5 +1,6 @@
 /* Basic Reset and Box Sizing */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -27,8 +28,24 @@ h1, h2, h3 {
     text-align: center;
 }
 
+/* Total Reviews & Average Review Score Stats Display*/
+#review-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    color: #7e7e7e;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
 /* Form Styles */
 #review-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -52,7 +69,7 @@ textarea {
 }
 
 
-button {
+#review-form button {
     background-color: #007bff; /* Blue button */
     color: #fff;
     padding: 10px 20px;
@@ -102,15 +119,6 @@ button:hover {
 
 /* Filter Styles */
 #filter-container {
-    margin-bottom: 20px;
-}
-
-/* Stats Styles */
-#stats {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
 

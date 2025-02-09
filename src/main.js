@@ -5,16 +5,14 @@ import { reviews } from "./reviews.js";
 // const submitBtn = document.getElementById("submit");
 const reviewList = document.getElementById("review-list");
 const reviewForm = document.getElementById("review-form");
+const reviewStats = document.getElementById("review-stats");
 
-
-// TODO 3: filter by genre
-// could display total # of reviews submitted
-// display average rating of all reviews
-
+// Flex Goals:
+// Sort by genre
+// Add movie poster picture on each card
 
 function getReviewsFeedHTML() {
   console.log("getReviewsFeedHTML called");
-  // reviewList.style.display = "flex";
 
   let reviewHTML = ``;
 
@@ -25,50 +23,64 @@ function getReviewsFeedHTML() {
                 <p>${review.genre}</p>
                 <p class="rating">Rating: ${review.rating}/5 ✨</p>
                 <p class="review-text">${review.review}</p>
-            </div>
-        `;
+            </div>`;
   });
   return reviewHTML;
 }
 
+function getReviewsStats() {
+  const totalReviews = reviews.length;
+  const totalReviewScores = reviews.reduce(
+    (total, review) => total + parseInt(review.rating), 0);
+  const averageReviewScore =
+    Math.floor(totalReviews > 0 ? totalReviewScores / totalReviews : 0);
+
+  return `
+    <div>
+        <p>Total Reviews: ${totalReviews}</p>
+        <p>Average Rating: ${averageReviewScore}✨</p>
+    </div>`;
+}
+
 function renderReviews() {
+  reviewStats.innerHTML = getReviewsStats();
   reviewList.innerHTML = getReviewsFeedHTML();
   console.log("reviews array after render:", reviews);
 }
 
 function createReview(event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    console.log("createReview called");
+  console.log("createReview called");
 
-    // get form values
-    let reviewTitle = document.getElementById("movie-title");
-    let reviewGenre = document.getElementById("movie-genre");
-    let reviewRating = document.getElementById("movie-rating");
-    let reviewText = document.getElementById("movie-text");
+  // get form values
+  let reviewTitle = document.getElementById("movie-title");
+  let reviewGenre = document.getElementById("movie-genre");
+  let reviewRating = document.getElementById("movie-rating");
+  let reviewText = document.getElementById("movie-text");
 
-    // init newReview object
-    let newReview;
+  // init newReview object
+  let newReview;
 
-    if (reviewTitle && reviewGenre && reviewRating && reviewText) {
-        // create newReview
-        newReview = {
-            title: reviewTitle.value,
-            genre: reviewGenre.value,
-            rating: reviewRating.value,
-            review: reviewText.value,
-        };
-    } else {
-        console.error("One or more review form elements not found:");
-        if (!reviewTitle) console.error("reviewTitle not found");
-        if (!reviewGenre) console.error("reviewGenre not found");
-        if (!reviewRating) console.error("reviewRating not found");
-        if (!reviewText) console.error("reviewText not found");
-        return;
-    }
-    console.log("New Review Object:", newReview);
-    addNewReview(newReview);
-    reviewForm.reset();
+  if (reviewTitle && reviewGenre && reviewRating && reviewText) {
+    // create newReview
+    newReview = {
+      title: reviewTitle.value,
+      genre: reviewGenre.value,
+      rating: reviewRating.value,
+      review: reviewText.value,
+    };
+  } else {
+    console.error("One or more review form elements not found:");
+    if (!reviewTitle) console.error("reviewTitle not found");
+    if (!reviewGenre) console.error("reviewGenre not found");
+    if (!reviewRating) console.error("reviewRating not found");
+    if (!reviewText) console.error("reviewText not found");
+    return;
+  }
+  console.log("New Review Object:", newReview);
+  addNewReview(newReview);
+  reviewForm.reset();
 }
 
 // adding newReview as an object to the array
