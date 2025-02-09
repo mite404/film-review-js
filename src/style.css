@@ -1,6 +1,5 @@
 /* Basic Reset and Box Sizing */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -20,7 +19,6 @@ body {
 }
 
 .card {
-    display: flex;
     justify-content: center;
 }
 
@@ -70,12 +68,16 @@ button:hover {
 
 /* Review List Styles */
 #review-list {
-    display: none; /* Use grid for layout */
-    grid-template-columns: repeat(3, 1fr); /* Responsive columns */
-    gap: 20px; /* Spacing between cards */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /* Consistent gap between items */
+    /*padding: 20px; !* Add padding to the container for spacing around items *!*/
 }
 
 .film-item {
+    /*width: 500px;*/
+    /*height: 300px;*/
+    box-sizing: border-box;
     background-color: #7e7e7e;
     align-content: center;
     padding: 20px;
@@ -83,8 +85,9 @@ button:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.film-item h3 {
+.film-item h4 {
     margin-bottom: 5px;
+    margin-top: 0;
 }
 
 .film-item .rating {
@@ -94,7 +97,7 @@ button:hover {
 
 .film-item .review-text {
     font-style: italic;
-    color: #666;
+    color: #cbcbcb;
 }
 
 /* Filter Styles */
@@ -112,8 +115,9 @@ button:hover {
 }
 
 /* Basic Responsive Design (adjust breakpoints as needed) */
-@media (max-width: 768px) {
+/* Media query to ensure at most 3 columns */
+@media (min-width: 900px) { /* Adjust breakpoint as needed */
     #review-list {
-        grid-template-columns: 1fr; /* Single column on smaller screens */
+        grid-template-columns: repeat(3, 1fr); /* Force 3 columns */
     }
 }

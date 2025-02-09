@@ -6,39 +6,25 @@ import { reviews } from "./reviews.js";
 const reviewList = document.getElementById("review-list");
 const reviewForm = document.getElementById("review-form");
 
-// const reviews = [];
-
-// TODO 1: add review form w/ fields
-// title, genre, rating, review text
-// submit review button
-
-// TODO 2: display film reviews
-// tap into array and display:
-// title, genre, rating, review text
-// possible stretch goal display as review 'cards'
 
 // TODO 3: filter by genre
 // could display total # of reviews submitted
 // display average rating of all reviews
 
-// submitBtn.addEventListener('click', function() {
-//     createReview()
-//     console.log('submitting...')
-// })
 
 function getReviewsFeedHTML() {
   console.log("getReviewsFeedHTML called");
-  reviewList.style.display = "flex";
+  // reviewList.style.display = "flex";
 
   let reviewHTML = ``;
 
   reviews.forEach(function (review) {
     reviewHTML += `
             <div class="film-item">
-                <h4>${review.title}</h4>
+                <h4 class="">${review.title}</h4>
                 <p>${review.genre}</p>
-                <p class="film-item rating">Rating: ${review.rating}/5 ✨</p>
-                <p>${review.review}</p>
+                <p class="rating">Rating: ${review.rating}/5 ✨</p>
+                <p class="review-text">${review.review}</p>
             </div>
         `;
   });
