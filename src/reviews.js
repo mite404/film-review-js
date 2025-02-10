@@ -3,37 +3,48 @@ export const reviews = [
         title: "Aliens",
         genre: "Action",
         rating: "4",
-        review: "A non-stop thrill ride! Explosions, car chases, and incredible stunts. The plot was a bit thin, but who cares when the action is this good?"
+        review: "A non-stop thrill ride! Explosions, car chases, and incredible stunts. The plot" +
+            " was a bit thin, but who cares when the action is this good?",
+        image: "./images/Aliens_Japan-500x708.jpg"
     },
     {
-        title: "An early career Matthew McConeghey vehicle",
-        genre: "Comedy",
-        rating: "5",
-        review: "A charming and hilarious rom-com. The leads had great chemistry, and the jokes were genuinely funny. Perfect for a feel-good movie night."
-    },
-    {
-        title: "Cape Fear",
+        title: "Jaws",
         genre: "Thriller",
         rating: "5",
-        review: "Kept me on the edge of my seat the whole time. The twists and turns were unexpected, and the acting was top-notch. A must-see for thriller fans."
+        review: "A charming and hilarious rom-com. The leads had great chemistry, and the jokes" +
+            " were genuinely funny. Perfect for a feel-good movie night.",
+        image: "./images/Jaws_Japan-500x704.jpg"
     },
     {
-        title: "Sci-Fi Masterpiece",
-        genre: "Sci-Fi",
+        title: "Deliverance",
+        genre: "Thriller",
         rating: "5",
-        review: "A visually stunning and thought-provoking sci-fi film. The special effects were incredible, and the story explored complex themes in a compelling way."
+        review: "Kept me on the edge of my seat the whole time. The twists and turns were" +
+            " unexpected, and the acting was top-notch. A must-see for thriller fans.",
+        image: "./images/Deliverance_Japan-500x707.jpg"
     },
     {
-        title: "Heartwarming Drama",
+        title: "Lock, Stock & Two Smoking Barrels",
+        genre: "Comedy",
+        rating: "5",
+        review: "tralalalala review... it stinks!",
+        image: "./images/LockStock_USA-500x738.jpg"
+    },
+    {
+        title: "Meek's Cutoff",
         genre: "Drama",
         rating: "4",
-        review: "A moving and emotional drama that will stay with you long after the credits roll. The performances were powerful, and the story was both heartbreaking and uplifting."
+        review: "A moving and emotional drama that will stay with you long after the credits" +
+            " roll. The performances were powerful, and the story was both heartbreaking and uplifting.",
+        image: "./images/MeeksCutoff_USA-500x732.jpg"
     },
     {
-        title: "Silly Slapstick Comedy",
-        genre: "Comedy",
+        title: "Frighmare",
+        genre: "Horror",
         rating: "2",
-        review: "A lighthearted and goofy comedy. Some of the jokes fell flat, but there were a few laugh-out-loud moments. Good for a mindless movie night."
+        review: "A lighthearted and goofy comedy. Some of the jokes fell flat, but there were a" +
+            " few laugh-out-loud moments. Good for a mindless movie night.",
+        image: "./images/Frightmare_USA-500x741.jpg"
     },
     {
         title: "Gritty Crime Drama",
