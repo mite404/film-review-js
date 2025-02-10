@@ -2,106 +2,126 @@ import javascriptLogo from "./javascript.svg";
 import viteLogo from "/vite.svg";
 import { reviews } from "./reviews.js";
 
-// const submitBtn = document.getElementById("submit");
-const reviewList = document.getElementById("review-list");
 const reviewForm = document.getElementById("review-form");
+const reviewStats = document.getElementById("review-stats");
+const reviewList = document.getElementById("review-list");
+const genreSelect = document.getElementById('genre-sort');
 
-// const reviews = [];
 
-// TODO 1: add review form w/ fields
-// title, genre, rating, review text
-// submit review button
+// Stretch Goals:
+// Add local storage persistence
 
-// TODO 2: display film reviews
-// tap into array and display:
-// title, genre, rating, review text
-// possible stretch goal display as review 'cards'
 
-// TODO 3: filter by genre
-// could display total # of reviews submitted
-// display average rating of all reviews
-
-// submitBtn.addEventListener('click', function() {
-//     createReview()
-//     console.log('submitting...')
-// })
-
-function getReviewsFeedHTML() {
+function getReviewsFeedHTML(genre) {
   console.log("getReviewsFeedHTML called");
-  reviewList.style.display = "flex";
+
+  let reviewsToDisplay = reviews // DEFAULT display - *all* reviews
+
+  if (genre !== 'all') {
+    reviewsToDisplay = reviews.filter(review => review.genre === genre);
+  }
 
   let reviewHTML = ``;
 
-  reviews.forEach(function (review) {
+  reviewsToDisplay.forEach(review => {
+
     reviewHTML += `
             <div class="film-item">
-                <h4>${review.title}</h4>
-                <p>${review.genre}</p>
-                <p class="film-item rating">Rating: ${review.rating}/5 ✨</p>
-                <p>${review.review}</p>
-            </div>
-        `;
+                <img src="${review.image}" alt="">
+                <h4 class="">${review.title}</h4>
+                <p><i>${review.genre}</i></p>
+                <p class="rating">Rating: ${review.rating}/5 ✨</p>
+                <p class="review-text">${review.review}</p>
+            </div>`;
   });
   return reviewHTML;
 }
 
-function renderReviews() {
-  reviewList.innerHTML = getReviewsFeedHTML();
-  console.log("reviews array after render:", reviews);
+function getReviewsStats() {
+  const totalReviews = reviews.length;
+  const totalReviewScores = reviews.reduce(
+    (total, review) => total + parseInt(review.rating), 0);
+  const averageReviewScore =
+    Math.floor(totalReviews > 0 ? totalReviewScores / totalReviews : 0);
+
+  return `
+    <div>
+        <p>Total Reviews: ${totalReviews}</p>
+        <p>Average Rating: ${averageReviewScore}✨</p>
+    </div>`;
 }
 
-function createReview(event) {
-    event.preventDefault();
 
-    console.log("createReview called");
+function renderReviews(genre) {
+  reviewStats.innerHTML = getReviewsStats();
+  reviewList.innerHTML = getReviewsFeedHTML(genre);
+  console.log("Reviews array after render:", reviews);
+}
 
-    // get form values
-    let reviewTitle = document.getElementById("movie-title");
-    let reviewGenre = document.getElementById("movie-genre");
-    let reviewRating = document.getElementById("movie-rating");
-    let reviewText = document.getElementById("movie-text");
+function createReview(e) {
+  e.preventDefault();
 
-    // init newReview object
-    let newReview;
+  console.log("createReview called");
 
-    if (reviewTitle && reviewGenre && reviewRating && reviewText) {
-        // create newReview
-        newReview = {
-            title: reviewTitle.value,
-            genre: reviewGenre.value,
-            rating: reviewRating.value,
-            review: reviewText.value,
-        };
-    } else {
-        console.error("One or more review form elements not found:");
-        if (!reviewTitle) console.error("reviewTitle not found");
-        if (!reviewGenre) console.error("reviewGenre not found");
-        if (!reviewRating) console.error("reviewRating not found");
-        if (!reviewText) console.error("reviewText not found");
-        return;
-    }
-    console.log("New Review Object:", newReview);
-    addNewReview(newReview);
-    reviewForm.reset();
+  // get form values
+  let reviewTitle = document.getElementById("movie-title");
+  let reviewGenre = document.getElementById("movie-genre");
+  let reviewRating = document.getElementById("movie-rating");
+  let reviewText = document.getElementById("movie-text");
+
+  // init newReview object
+  let newReview;
+
+  if (reviewTitle && reviewGenre && reviewRating && reviewText) {
+    // create newReview
+    newReview = {
+      title: reviewTitle.value,
+      genre: reviewGenre.value,
+      rating: reviewRating.value,
+      review: reviewText.value,
+    };
+  } else {
+    console.error("One or more review form elements not found:");
+    if (!reviewTitle) console.error("reviewTitle not found");
+    if (!reviewGenre) console.error("reviewGenre not found");
+    if (!reviewRating) console.error("reviewRating not found");
+    if (!reviewText) console.error("reviewText not found");
+    return;
+  }
+  console.log("New Review Object:", newReview);
+
+  addNewReview(newReview);
+  reviewForm.reset();
 }
 
 // adding newReview as an object to the array
 function addNewReview(reviewObject) {
   console.log("addNewReview called with:", reviewObject);
+
   reviews.unshift(reviewObject);
-  console.log("reviews array before render:", reviews);
-  renderReviews();
+  const selectedGenre = genreSelect.value
+
+  renderReviews(selectedGenre);
 }
 
+
+// if User Review Form has been completed and submit button has been clicked, then call createReview
 if (reviewForm) {
   reviewForm.addEventListener("submit", createReview);
-  console.log("Event listener attached");
+
+  console.log("reviewForm event listener attached");
 } else {
   console.log("Review form NOT found");
 }
 
 // initial render
-renderReviews();
+renderReviews('all');
+
+// rendering our reviewList according to a selected genre
+genreSelect.addEventListener('change', () => {
+  const selectedGenre = genreSelect.value;
+  renderReviews(selectedGenre);
+});
 
 document.getElementById("logos").innerHTML = `
     <div>

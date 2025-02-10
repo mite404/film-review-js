@@ -20,7 +20,6 @@ body {
 }
 
 .card {
-    display: flex;
     justify-content: center;
 }
 
@@ -31,11 +30,51 @@ h1, h2, h3 {
 
 /* Form Styles */
 #review-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+}
+
+#review-form button {
+    background-color: #007bff; /* Blue button */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Total Reviews & Average Review Score Stats Display*/
+#review-stats-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    color: #7e7e7e;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+#genre-sort button {
+    background-color: #007bff; /* Blue button */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 label {
@@ -53,48 +92,45 @@ textarea {
     border-radius: 4px;
 }
 
-
-button {
-    background-color: #007bff; /* Blue button */
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
 /* Review List Styles */
 #review-list {
-    display: none; /* Use grid for layout */
-    grid-template-columns: repeat(3, 1fr); /* Responsive columns */
-    gap: 20px; /* Spacing between cards */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; /* Consistent gap between items */
+    /*padding: 20px; !* Add padding to the container for spacing around items *!*/
 }
 
 .film-item {
+    /*width: 500px;*/
+    /*height: 300px;*/
+
     background-color: #7e7e7e;
-    align-content: center;
+    /*align-content: center;*/
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.film-item h3 {
-    margin-bottom: 5px;
+.film-item img {
+    display: flex;
+    max-width: 350px;
+    margin: auto;
+    /*padding: 10px;*/
+}
+
+.film-item h4 {
+    margin-bottom: 6px;
+    margin-top: 12px;
 }
 
 .film-item .rating {
     color: #f2c14e; /* Gold color for stars */
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .film-item .review-text {
     font-style: italic;
-    color: #666;
+    color: #cbcbcb;
 }
 
 /* Filter Styles */
@@ -102,18 +138,16 @@ button:hover {
     margin-bottom: 20px;
 }
 
-/* Stats Styles */
-#stats {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+/* Basic Responsive Design (adjust breakpoints as needed) */
+/* Media query to ensure at most 3 columns */
+@media (max-width: 900px) { /* Adjust breakpoint as needed */
+    #review-list {
+        grid-template-columns: repeat(2, 1fr); /* Force 2 columns */
+    }
 }
 
-/* Basic Responsive Design (adjust breakpoints as needed) */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     #review-list {
-        grid-template-columns: 1fr; /* Single column on smaller screens */
+        grid-template-columns: repeat(1, 1fr); /* Force 2 columns */
     }
 }
