@@ -5,7 +5,7 @@ export const reviews = [
         rating: "4",
         review: "A non-stop thrill ride! Explosions, car chases, and incredible stunts. The plot" +
             " was a bit thin, but who cares when the action is this good?",
-        image: "./images/Aliens_Japan-500x708.jpg"
+        image: "./src/images/Aliens_Japan-500x708.jpg"
     },
     {
         title: "Jaws",
@@ -13,7 +13,7 @@ export const reviews = [
         rating: "5",
         review: "A charming and hilarious rom-com. The leads had great chemistry, and the jokes" +
             " were genuinely funny. Perfect for a feel-good movie night.",
-        image: "./images/Jaws_Japan-500x704.jpg"
+        image: "./src/images/Jaws_Japan-500x704.jpg"
     },
     {
         title: "Deliverance",
@@ -21,14 +21,14 @@ export const reviews = [
         rating: "5",
         review: "Kept me on the edge of my seat the whole time. The twists and turns were" +
             " unexpected, and the acting was top-notch. A must-see for thriller fans.",
-        image: "./images/Deliverance_Japan-500x707.jpg"
+        image: "./src/images/Deliverance_Japan-500x707.jpg"
     },
     {
         title: "Lock, Stock & Two Smoking Barrels",
         genre: "Comedy",
         rating: "5",
         review: "tralalalala review... it stinks!",
-        image: "./images/LockStock_USA-500x738.jpg"
+        image: "./src/images/LockStock_USA-500x738.jpg"
     },
     {
         title: "Meek's Cutoff",
@@ -36,7 +36,7 @@ export const reviews = [
         rating: "4",
         review: "A moving and emotional drama that will stay with you long after the credits" +
             " roll. The performances were powerful, and the story was both heartbreaking and uplifting.",
-        image: "./images/MeeksCutoff_USA-500x732.jpg"
+        image: "./src/images/MeeksCutoff_USA-500x732.jpg"
     },
     {
         title: "Frighmare",
@@ -44,7 +44,7 @@ export const reviews = [
         rating: "2",
         review: "A lighthearted and goofy comedy. Some of the jokes fell flat, but there were a" +
             " few laugh-out-loud moments. Good for a mindless movie night.",
-        image: "./images/Frightmare_USA-500x741.jpg"
+        image: "./src/images/Frightmare_USA-500x741.jpg"
     },
     {
         title: "Gritty Crime Drama",
