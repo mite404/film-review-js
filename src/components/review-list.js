@@ -18,12 +18,15 @@ export function getReviewsFeedHTML(reviews) {
   return reviewHTML;
 }
 
-
 export function getReviewsStats(reviews) {
   const totalReviews = reviews.length;
   const totalReviewScores = reviews.reduce(
-    (total, review) => total + parseInt(review.rating), 0);
-  const averageReviewScore = Math.floor(totalReviews > 0 ? totalReviewScores / totalReviews : 0);
+    (total, review) => total + parseInt(review.rating),
+    0,
+  );
+  const averageReviewScore = Math.floor(
+    totalReviews > 0 ? totalReviewScores / totalReviews : 0,
+  );
 
   return `
     <div>
@@ -31,7 +34,6 @@ export function getReviewsStats(reviews) {
         <p>Average Rating: ${averageReviewScore}✨</p>
     </div>`;
 }
-
 
 export function renderReviews(reviews, reviewList, reviewStats) {
   reviewStats.innerHTML = getReviewsStats(reviews);
