@@ -1,7 +1,7 @@
 import javascriptLogo from "./javascript.svg";
 import viteLogo from "/vite.svg";
 import { reviews } from "./data/reviews.js";
-import { renderReviews } from "./components/review-list.js"
+import { renderReviews } from "./components/review-list.js";
 
 const reviewForm = document.getElementById("review-form");
 const reviewStats = document.getElementById("review-stats");
@@ -11,11 +11,10 @@ const genreSelect = document.getElementById("genre-select");
 // Stretch Goals:
 // Add local storage persistence
 
-renderReviews(reviews, reviewList, reviewStats);  // Initial render
+renderReviews(reviews, reviewList, reviewStats); // Initial render
 
 reviewForm.addEventListener("submit", createReview);
 genreSelect.addEventListener("change", handleGenreChange);
-
 
 function createReview(e) {
   e.preventDefault();
@@ -53,7 +52,6 @@ function createReview(e) {
   reviewForm.reset();
 }
 
-
 // adding newReview as an object to the array
 function addNewReview(reviewObject) {
   console.log("addNewReview called with:", reviewObject);
@@ -69,7 +67,6 @@ function addNewReview(reviewObject) {
   renderReviews(selectedGenre);
 }
 
-
 // if User Review Form has been completed and submit button has been clicked, then call createReview
 if (reviewForm) {
   reviewForm.addEventListener("submit", createReview);
@@ -78,7 +75,6 @@ if (reviewForm) {
 } else {
   console.log("Review form NOT found");
 }
-
 
 // rendering our reviewList according to a selected genre
 function handleGenreChange() {
@@ -89,7 +85,6 @@ function handleGenreChange() {
       : reviews.filter((review) => review.genre === selectedGenre);
   renderReviews(reviewsToDisplay, reviewList, reviewStats);
 }
-
 
 document.getElementById("logos").innerHTML = `
     <div>

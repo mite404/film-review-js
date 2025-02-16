@@ -1,75 +1,78 @@
 <!doctype html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <!-- CSS -->
-    <link rel="stylesheet" href="./src/css/style.css">
-    
+    <link rel="stylesheet" href="./src/css/style.css" />
+
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <title>Film Review JS</title>
-</head>
 
-<body>
+    <title>Film Review JS</title>
+  </head>
+
+  <body>
     <header>
-        <div id="logos">
-        </div>
+      <div id="logos"></div>
     </header>
     <form id="review-form">
-        <label for="movie-title">Movie Title:</label>
-        <input id="movie-title"
-               type="text"
-               name="movie-title"
-               placeholder="Movie Title"
-               required/>
-        <label for="movie-genre">Movie Genre:</label>
-        <select id="movie-genre" name="movie-genre" required>
-            <option value="" disabled selected>Select Genre</option>
-            <option value="Action">Action</option>
-            <option value="Comedy">Comedy</option>
-            <option value="Drama">Drama</option>
-            <option value="Sci-Fi">Sci-Fi</option>
-            <option value="Thriller">Thriller</option>
-            <option value="Horror">Horror</option>
-        </select>
-        <label for="movie-rating">Movie Rating</label>
-        <input id="movie-rating"
-               type="number"
-               name="movie-rating"
-               min="1"
-               max="5"
-               placeholder="Rating (1-5)✨"
-               required/>
-        <label for="movie-text">Review:</label>
-        <textarea id="movie-text"
-                  name="movie-text"
-                  placeholder="Enter your review..."
-                  required></textarea>
-        
-            <button id="submit" type="submit">Post Review</button>
-       
+      <label for="movie-title">Movie Title:</label>
+      <input
+        id="movie-title"
+        type="text"
+        name="movie-title"
+        placeholder="Movie Title"
+        required
+      />
+      <label for="movie-genre">Movie Genre:</label>
+      <select id="movie-genre" name="movie-genre" required>
+        <option value="" disabled selected>Select Genre</option>
+        <option value="Action">Action</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Drama">Drama</option>
+        <option value="Sci-Fi">Sci-Fi</option>
+        <option value="Thriller">Thriller</option>
+        <option value="Horror">Horror</option>
+      </select>
+      <label for="movie-rating">Movie Rating</label>
+      <input
+        id="movie-rating"
+        type="number"
+        name="movie-rating"
+        min="1"
+        max="5"
+        placeholder="Rating (1-5)✨"
+        required
+      />
+      <label for="movie-text">Review:</label>
+      <textarea
+        id="movie-text"
+        name="movie-text"
+        placeholder="Enter your review..."
+        required
+      ></textarea>
+
+      <button id="submit" type="submit">Post Review</button>
     </form>
     <div id="review-stats-container">
-        <div id="review-stats">
-            <!-- Reviews Stats Populate Here!! -->
-        </div>
-        <label for="genre-select">Movie Genre:</label>
-        <select id="genre-select" name="movie-genre" required>
-            <option value="all" selected>All Genres</option>
-            <option value="Action">Action</option>
-            <option value="Comedy">Comedy</option>
-            <option value="Drama">Drama</option>
-            <option value="Sci-Fi">Sci-Fi</option>
-            <option value="Thriller">Thriller</option>
-            <option value="Horror">Horror</option>
-        </select>
-<!--        <button id="genre-sort" type="button">Genre Sort</button>-->
+      <div id="review-stats">
+        <!-- Reviews Stats Populate Here!! -->
+      </div>
+      <label for="genre-select">Movie Genre:</label>
+      <select id="genre-select" name="movie-genre" required>
+        <option value="all" selected>All Genres</option>
+        <option value="Action">Action</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Drama">Drama</option>
+        <option value="Sci-Fi">Sci-Fi</option>
+        <option value="Thriller">Thriller</option>
+        <option value="Horror">Horror</option>
+      </select>
+      <!--        <button id="genre-sort" type="button">Genre Sort</button>-->
     </div>
     <div class="review-list" id="review-list">
-        <!-- Reviews Populate Here!! -->
+      <!-- Reviews Populate Here!! -->
     </div>
     <script type="module" src="/src/main.js"></script>
-</body>
+  </body>
 </html>
-
