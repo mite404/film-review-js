@@ -1,7 +1,8 @@
 import javascriptLogo from "./javascript.svg";
 import viteLogo from "/vite.svg";
 import { reviews } from "./data/reviews.js";
-import { renderReviews } from "./components/review-list.js";
+import { getReviewsFeedHTML, renderReviews } from "./components/review-list.js";
+import { v4 as uuidv4 } from "uuid";
 
 const reviewForm = document.getElementById("review-form");
 const reviewStats = document.getElementById("review-stats");
@@ -9,7 +10,48 @@ const reviewList = document.getElementById("review-list");
 const genreSelect = document.getElementById("genre-select");
 
 // Stretch Goals:
-// Add local storage persistence
+// TODO: Add local storage persistence
+
+// create 10 uuids for the existing mock data
+// const uuids = [];
+//
+// for (let i = 0; i < 10; i++) {
+//   uuids.push(uuidv4());
+// }
+// console.log(uuids);
+
+document.addEventListener("click", function (e) {
+  if (e.target.dataset.like) {
+    handleLikeClick(e.target.dataset.like);
+    console.log("handleLickClick called");
+  }
+});
+
+function handleLikeClick(reviewId) {
+  const targetReviewObj = reviews.find((review) => review.uuid === reviewId);
+
+  // logic for 'total number of likes'
+  // if (targetReviewObj.isLiked) {
+  //   targetReviewObj.likes--
+  // } else {
+  //   targetReviewObj.likes++
+  // }
+
+  if (!targetReviewObj) {
+    console.error("Review not found!");
+    return;
+  }
+
+  targetReviewObj.isLiked = !targetReviewObj.isLiked;
+
+  // Re-render the reviews to update teh heart icon's class
+  const selectedGenre = document.getElementById("genre-select").value;
+  const reviewsToDisplay =
+    selectedGenre === "all"
+      ? reviews
+      : reviews.filter((review) => review.genre === selectedGenre);
+  renderReviews(reviewsToDisplay, reviewList, reviewStats);
+}
 
 renderReviews(reviews, reviewList, reviewStats); // Initial render
 

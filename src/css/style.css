@@ -135,6 +135,10 @@ textarea {
   color: #cbcbcb;
 }
 
+.liked {
+  color: #da1717;
+}
+
 /* Filter Styles */
 #filter-container {
   margin-bottom: 20px;
