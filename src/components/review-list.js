@@ -6,15 +6,19 @@ export function getReviewsFeedHTML(reviews) {
   let reviewHTML = ``;
 
   reviews.forEach((review) => {
+
+    const likeIconClass = review.isLiked ? 'liked' : ''
+
     reviewHTML += `
       <div class="film-item">
           <img src="${review.image}" alt="">
           <h4 class="">${review.title}</h4>
           <p><i>${review.genre}</i></p>
           <p class="rating">Rating: ${review.rating}/5 ✨</p>
+          <i class="fa-solid fa-heart ${likeIconClass}" data-like="${review.uuid}"></i>
           <p class="review-text">${review.review}</p>
       </div>`;
-  });
+  })
   return reviewHTML;
 }
 
