@@ -1,7 +1,7 @@
 import javascriptLogo from "./javascript.svg";
 import viteLogo from "/vite.svg";
 import { reviews } from "./data/reviews.js";
-import { getReviewsFeedHTML, renderReviews } from "./components/review-list.js";
+import { renderReviews } from "./components/review-list.js";
 import { v4 as uuidv4 } from "uuid";
 
 const reviewForm = document.getElementById("review-form");
@@ -10,15 +10,9 @@ const reviewList = document.getElementById("review-list");
 const genreSelect = document.getElementById("genre-select");
 
 // Stretch Goals:
+// TODO: Filter by liked reviews? as separate button?
 // TODO: Add local storage persistence
 
-// create 10 uuids for the existing mock data
-// const uuids = [];
-//
-// for (let i = 0; i < 10; i++) {
-//   uuids.push(uuidv4());
-// }
-// console.log(uuids);
 
 document.addEventListener("click", function (e) {
   if (e.target.dataset.like) {
@@ -30,13 +24,6 @@ document.addEventListener("click", function (e) {
 function handleLikeClick(reviewId) {
   const targetReviewObj = reviews.find((review) => review.uuid === reviewId);
 
-  // logic for 'total number of likes'
-  // if (targetReviewObj.isLiked) {
-  //   targetReviewObj.likes--
-  // } else {
-  //   targetReviewObj.likes++
-  // }
-
   if (!targetReviewObj) {
     console.error("Review not found!");
     return;
@@ -44,19 +31,15 @@ function handleLikeClick(reviewId) {
 
   targetReviewObj.isLiked = !targetReviewObj.isLiked;
 
-  // Re-render the reviews to update teh heart icon's class
-  const selectedGenre = document.getElementById("genre-select").value;
-  const reviewsToDisplay =
-    selectedGenre === "all"
-      ? reviews
-      : reviews.filter((review) => review.genre === selectedGenre);
-  renderReviews(reviewsToDisplay, reviewList, reviewStats);
+  // Re-render the reviews to update the heart icon's class
+  const selectedGenre = genreSelect.value;
+  filterReviewsGenre(selectedGenre);
 }
 
 renderReviews(reviews, reviewList, reviewStats); // Initial render
 
 reviewForm.addEventListener("submit", createReview);
-genreSelect.addEventListener("change", handleGenreChange);
+genreSelect.addEventListener("change", filterReviewsGenre);
 
 function createReview(e) {
   e.preventDefault();
@@ -99,14 +82,10 @@ function addNewReview(reviewObject) {
   console.log("addNewReview called with:", reviewObject);
 
   reviews.unshift(reviewObject);
-  const selectedGenre = genreSelect.value;
-  const reviewsToDisplay =
-    selectedGenre === "all"
-      ? reviews
-      : reviews.filter((review) => review.genre === selectedGenre);
-  renderReviews(reviewsToDisplay, reviewList, reviewStats);
 
-  renderReviews(selectedGenre);
+  const selectedGenre = genreSelect.value;
+
+  filterReviewsGenre(selectedGenre);
 }
 
 // if User Review Form has been completed and submit button has been clicked, then call createReview
@@ -119,8 +98,8 @@ if (reviewForm) {
 }
 
 // rendering our reviewList according to a selected genre
-function handleGenreChange() {
-  const selectedGenre = genreSelect.value;
+function filterReviewsGenre(genre = 'all') {
+  const selectedGenre = genre === 'all' ? 'all' : genreSelect.value;
   const reviewsToDisplay =
     selectedGenre === "all"
       ? reviews
@@ -141,3 +120,12 @@ document.getElementById("logos").innerHTML = `
             <h3>User Submitted Film Reviews</h3>
         </div>
     </div>`;
+
+
+// create 10 uuids for the existing mock data
+// const uuids = [];
+//
+// for (let i = 0; i < 10; i++) {
+//   uuids.push(uuidv4());
+// }
+// console.log(uuids);
