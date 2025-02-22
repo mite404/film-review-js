@@ -4,16 +4,19 @@ import { reviews } from "./data/reviews.js";
 import { renderReviews } from "./components/review-list.js";
 import { v4 as uuidv4 } from "uuid";
 
+
 const reviewForm = document.getElementById("review-form");
 const reviewStats = document.getElementById("review-stats");
 const reviewList = document.getElementById("review-list");
 const genreSelect = document.getElementById("genre-select");
+const favoriteSort = document.getElementById("favorite-sort");
+
 
 // Stretch Goals:
-// TODO: Filter by liked reviews? as separate button?
 // TODO: Add local storage persistence
 
 
+// Comparing UUID of click to object in array via handleLikeClick func
 document.addEventListener("click", function (e) {
   if (e.target.dataset.like) {
     handleLikeClick(e.target.dataset.like);
@@ -21,7 +24,15 @@ document.addEventListener("click", function (e) {
   }
 });
 
+
 function handleLikeClick(reviewId) {
+  // Finds UUID of review's 'clicked liked icon' in reviews array and sets `isLiked` to true/false.
+
+  if (!reviewId) {
+    console.error("Invalid reviewId!");
+    return;
+  }
+
   const targetReviewObj = reviews.find((review) => review.uuid === reviewId);
 
   if (!targetReviewObj) {
@@ -36,12 +47,27 @@ function handleLikeClick(reviewId) {
   filterReviewsGenre(selectedGenre);
 }
 
+
 renderReviews(reviews, reviewList, reviewStats); // Initial render
+
 
 reviewForm.addEventListener("submit", createReview);
 genreSelect.addEventListener("change", filterReviewsGenre);
 
+
+// if 'User Review Form' has been completed and submit button clicked, call `createReview`
+if (reviewForm) {
+  reviewForm.addEventListener("submit", createReview);
+
+  console.log("reviewForm event listener attached");
+} else {
+  console.log("Review form NOT found");
+}
+
+
 function createReview(e) {
+  // Creates a new review object and adds the values from the form to it.
+
   e.preventDefault();
 
   console.log("createReview called");
@@ -52,11 +78,11 @@ function createReview(e) {
   let reviewRating = document.getElementById("movie-rating");
   let reviewText = document.getElementById("movie-text");
 
-  // init newReview object
+  // init `newReview` object
   let newReview;
 
   if (reviewTitle && reviewGenre && reviewRating && reviewText) {
-    // create newReview
+    // create `newReview`
     newReview = {
       title: reviewTitle.value,
       genre: reviewGenre.value,
@@ -71,14 +97,21 @@ function createReview(e) {
     if (!reviewText) console.error("reviewText not found");
     return;
   }
-  console.log("New Review Object:", newReview);
 
-  addNewReview(newReview);
+  console.log("newReview Object created:", newReview);
+
+  if (typeof addNewReview === "function") {
+    addNewReview(newReview);
+  } else {
+    console.error("addNewReview function not found!");
+  }
   reviewForm.reset();
 }
 
-// adding newReview as an object to the array
+
 function addNewReview(reviewObject) {
+  // Adding `newReview` as an object to the reviews array.
+
   console.log("addNewReview called with:", reviewObject);
 
   reviews.unshift(reviewObject);
@@ -88,25 +121,48 @@ function addNewReview(reviewObject) {
   filterReviewsGenre(selectedGenre);
 }
 
-// if User Review Form has been completed and submit button has been clicked, then call createReview
-if (reviewForm) {
-  reviewForm.addEventListener("submit", createReview);
 
-  console.log("reviewForm event listener attached");
-} else {
-  console.log("Review form NOT found");
-}
+function filterReviewsGenre(genre = "all") {
+  // Filters the `reviewList` by genre then re-renders the view.
 
-// rendering our reviewList according to a selected genre
-function filterReviewsGenre(genre = 'all') {
-  const selectedGenre = genre === 'all' ? 'all' : genreSelect.value;
+  if (!genreSelect) {
+    console.error("Genre select element not found!");
+    return;
+  }
+
+  const selectedGenre = genre === "all" ? "all" : genreSelect.value;
   const reviewsToDisplay =
     selectedGenre === "all"
       ? reviews
       : reviews.filter((review) => review.genre === selectedGenre);
-  renderReviews(reviewsToDisplay, reviewList, reviewStats);
+
+  if (typeof renderReviews === "function") {
+    renderReviews(reviewsToDisplay, reviewList, reviewStats);
+  } else {
+    console.error("renderReviews function not found!");
+  }
 }
 
+
+favoriteSort.addEventListener("click", filterReviewsFav)
+
+
+function filterReviewsFav() {
+  // Filters the `reviewList` by liked reviews then re-renders the view.
+
+  const favoritesToDisplay = reviews.filter((review) => review.isLiked);
+
+  if (favoritesToDisplay.length === 0) {
+    console.log("No reviews have been liked!");
+    reviewList.innerHTML = "<p>Error: No reviews have been liked!</p>"
+    return;
+  }
+
+  renderReviews(favoritesToDisplay, reviewList, reviewStats)
+}
+
+
+// Vite & JS logos
 document.getElementById("logos").innerHTML = `
     <div>
         <div class="container">
@@ -122,6 +178,7 @@ document.getElementById("logos").innerHTML = `
     </div>`;
 
 
+// UUID creation for my mock review data
 // create 10 uuids for the existing mock data
 // const uuids = [];
 //

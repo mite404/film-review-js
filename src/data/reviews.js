@@ -7,7 +7,7 @@ export const reviews = [
       "A non-stop thrill ride! Explosions, car chases, and incredible stunts. The plot" +
       " was a bit thin, but who cares when the action is this good?",
     image: "./src/images/Aliens_Japan-500x708.jpg",
-    isLiked: true,
+    isLiked: false,
     uuid: 'c04ac16b-8a69-40ca-aa2a-ce0bd4a825c5',
   },
   {

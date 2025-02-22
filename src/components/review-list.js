@@ -34,8 +34,7 @@ export function getReviewsStats(reviews) {
 
   return `
     <div>
-        <p>Total Reviews: ${totalReviews}</p>
-        <p>Average Rating: ${averageReviewScore}✨</p>
+        <p>Total Reviews: ${totalReviews}  |  Average Rating: ${averageReviewScore}✨</p>
     </div>`;
 }
 

@@ -57,23 +57,25 @@
         required
       ></textarea>
 
-      <button id="submit" type="submit">Post Review</button>
+      <button class="button" id="submit" type="submit">Post Review</button>
     </form>
     <div id="review-stats-container">
       <div id="review-stats">
         <!-- Reviews Stats Populate Here!! -->
       </div>
-      <label for="genre-select">Movie Genre:</label>
-      <select id="genre-select" name="movie-genre" required>
-        <option value="all" selected>All Genres</option>
-        <option value="Action">Action</option>
-        <option value="Comedy">Comedy</option>
-        <option value="Drama">Drama</option>
-        <option value="Sci-Fi">Sci-Fi</option>
-        <option value="Thriller">Thriller</option>
-        <option value="Horror">Horror</option>
-      </select>
-      <!-- <button id="genre-sort" type="button">Genre Sort</button> -->
+      <div id="filter-container">
+        <label for="genre-select">Genre:</label>
+        <select id="genre-select" name="movie-genre" required>
+          <option value="all" selected>All Genres</option>
+          <option value="Action">Action</option>
+          <option value="Comedy">Comedy</option>
+          <option value="Drama">Drama</option>
+          <option value="Sci-Fi">Sci-Fi</option>
+          <option value="Thriller">Thriller</option>
+          <option value="Horror">Horror</option>
+        </select>
+        <button class="button" id="favorite-sort" type="button">Sort by Favorite</button>
+      </div>
     </div>
     <div class="review-list" id="review-list">
       <!-- Reviews Populate Here!! -->
