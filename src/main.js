@@ -2,10 +2,12 @@ import javascriptLogo from "./javascript.svg";
 import viteLogo from "/vite.svg";
 import { reviews } from "./data/reviews.js";
 import { renderReviews } from "./components/review-list.js";
+import { populateGenreList } from "./components/populateGenreList.js";
 import { v4 as uuidv4 } from "uuid";
 
 
 const reviewForm = document.getElementById("review-form");
+const movieGenre = document.getElementById("movie-genre")
 const reviewStats = document.getElementById("review-stats");
 const reviewList = document.getElementById("review-list");
 const genreSelect = document.getElementById("genre-select");
@@ -15,6 +17,7 @@ const favoriteSort = document.getElementById("favorite-sort");
 // Stretch Goals:
 // TODO: Add local storage persistence
 
+populateGenreList(["movie-genre", "genre-select"])
 
 // Comparing UUID of click to object in array via handleLikeClick func
 document.addEventListener("click", function (e) {
@@ -88,6 +91,7 @@ function createReview(e) {
       genre: reviewGenre.value,
       rating: reviewRating.value,
       review: reviewText.value,
+      uuid: uuidv4()
     };
   } else {
     console.error("One or more review form elements not found:");
@@ -100,11 +104,6 @@ function createReview(e) {
 
   console.log("newReview Object created:", newReview);
 
-  if (typeof addNewReview === "function") {
-    addNewReview(newReview);
-  } else {
-    console.error("addNewReview function not found!");
-  }
   reviewForm.reset();
 }
 
