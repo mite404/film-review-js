@@ -1,23 +1,47 @@
 import javascriptLogo from "./javascript.svg";
 import viteLogo from "/vite.svg";
 import { reviews } from "./data/reviews.js";
-import { renderReviews } from "./components/review-list.js";
+import { renderReviews } from "./components/renderView.js";
 import { populateGenreList } from "./components/populateGenreList.js";
 import { v4 as uuidv4 } from "uuid";
 
-
 const reviewForm = document.getElementById("review-form");
-const movieGenre = document.getElementById("movie-genre")
+const movieGenre = document.getElementById("movie-genre");
 const reviewStats = document.getElementById("review-stats");
 const reviewList = document.getElementById("review-list");
 const genreSelect = document.getElementById("genre-select");
 const favoriteSort = document.getElementById("favorite-sort");
 
+function loadReviews() {
+  // Load reviews from local storage.
 
-// Stretch Goals:
-// TODO: Add local storage persistence
+  const storedReviews = localStorage.getItem("user-reviews");
 
-populateGenreList(["movie-genre", "genre-select"])
+  if (storedReviews) {
+    const parsedReviews = JSON.parse(storedReviews);
+    console.log("Loaded reviews from local storage:", parsedReviews);
+
+    return Array.isArray(parsedReviews) ? parsedReviews : [];
+  } else {
+    // If no reviews in local storage, use default reviews and save them to `localStorage`
+    saveUserReviews(reviews);
+    console.log("No reviews in local storage, using default reviews:", reviews);
+    return reviews; // Default reviews list if nothing is in `localStorage`
+  }
+}
+
+function saveUserReviews(reviews) {
+  // Save reviews to local storage.
+  localStorage.setItem("user-reviews", JSON.stringify(reviews));
+  console.log("Saved reviews to local storage:", reviews);
+}
+
+// Initial render
+let currentReviews = loadReviews();
+filterReviewsGenre("all", currentReviews);
+
+// Populate genre select elements
+populateGenreList(["movie-genre", "genre-select"]);
 
 // Comparing UUID of click to object in array via handleLikeClick func
 document.addEventListener("click", function (e) {
@@ -27,7 +51,6 @@ document.addEventListener("click", function (e) {
   }
 });
 
-
 function handleLikeClick(reviewId) {
   // Finds UUID of review's 'clicked liked icon' in reviews array and sets `isLiked` to true/false.
 
@@ -36,7 +59,8 @@ function handleLikeClick(reviewId) {
     return;
   }
 
-  const targetReviewObj = reviews.find((review) => review.uuid === reviewId);
+  const targetReviewObj = currentReviews.find(
+    (review) => review.uuid === reviewId);
 
   if (!targetReviewObj) {
     console.error("Review not found!");
@@ -50,13 +74,10 @@ function handleLikeClick(reviewId) {
   filterReviewsGenre(selectedGenre);
 }
 
-
-renderReviews(reviews, reviewList, reviewStats); // Initial render
-
-
+// Event listeners
 reviewForm.addEventListener("submit", createReview);
 genreSelect.addEventListener("change", filterReviewsGenre);
-
+favoriteSort.addEventListener("click", filterReviewsFav);
 
 // if 'User Review Form' has been completed and submit button clicked, call `createReview`
 if (reviewForm) {
@@ -66,7 +87,6 @@ if (reviewForm) {
 } else {
   console.log("Review form NOT found");
 }
-
 
 function createReview(e) {
   // Creates a new review object and adds the values from the form to it.
@@ -91,7 +111,7 @@ function createReview(e) {
       genre: reviewGenre.value,
       rating: reviewRating.value,
       review: reviewText.value,
-      uuid: uuidv4()
+      uuid: uuidv4(),
     };
   } else {
     console.error("One or more review form elements not found:");
@@ -104,24 +124,24 @@ function createReview(e) {
 
   console.log("newReview Object created:", newReview);
 
+  addNewReview(newReview);
+
   reviewForm.reset();
 }
-
 
 function addNewReview(reviewObject) {
   // Adding `newReview` as an object to the reviews array.
 
   console.log("addNewReview called with:", reviewObject);
 
-  reviews.unshift(reviewObject);
+  currentReviews.unshift(reviewObject);
 
-  const selectedGenre = genreSelect.value;
+  saveUserReviews(currentReviews);
 
-  filterReviewsGenre(selectedGenre);
+  filterReviewsGenre(genreSelect.value, currentReviews); // Re-render the reviews
 }
 
-
-function filterReviewsGenre(genre = "all") {
+function filterReviewsGenre(genre = "all", reviews = currentReviews) {
   // Filters the `reviewList` by genre then re-renders the view.
 
   if (!genreSelect) {
@@ -135,31 +155,23 @@ function filterReviewsGenre(genre = "all") {
       ? reviews
       : reviews.filter((review) => review.genre === selectedGenre);
 
-  if (typeof renderReviews === "function") {
-    renderReviews(reviewsToDisplay, reviewList, reviewStats);
-  } else {
-    console.error("renderReviews function not found!");
-  }
+  renderReviews(reviewsToDisplay, reviewList, reviewStats);
+  console.log("Filtered reviews by genre:", selectedGenre, reviewsToDisplay);
 }
-
-
-favoriteSort.addEventListener("click", filterReviewsFav)
-
 
 function filterReviewsFav() {
   // Filters the `reviewList` by liked reviews then re-renders the view.
 
-  const favoritesToDisplay = reviews.filter((review) => review.isLiked);
+  const favoritesToDisplay = currentReviews.filter((review) => review.isLiked);
 
   if (favoritesToDisplay.length === 0) {
     console.log("No reviews have been liked!");
-    reviewList.innerHTML = "<p>Error: No reviews have been liked!</p>"
+    reviewList.innerHTML = "<p>Error: No reviews have been liked!</p>";
     return;
   }
 
-  renderReviews(favoritesToDisplay, reviewList, reviewStats)
+  renderReviews(favoritesToDisplay, reviewList, reviewStats);
 }
-
 
 // Vite & JS logos
 document.getElementById("logos").innerHTML = `
@@ -175,7 +187,6 @@ document.getElementById("logos").innerHTML = `
             <h3>User Submitted Film Reviews</h3>
         </div>
     </div>`;
-
 
 // UUID creation for my mock review data
 // create 10 uuids for the existing mock data

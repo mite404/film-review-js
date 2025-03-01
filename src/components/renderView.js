@@ -6,8 +6,7 @@ export function getReviewsFeedHTML(reviews) {
   let reviewHTML = ``;
 
   reviews.forEach((review) => {
-
-    const likeIconClass = review.isLiked ? 'liked' : ''
+    const likeIconClass = review.isLiked ? "liked" : "";
 
     reviewHTML += `
       <div class="film-item">
@@ -18,11 +17,19 @@ export function getReviewsFeedHTML(reviews) {
           <i class="fa-solid fa-heart ${likeIconClass}" data-like="${review.uuid}"></i>
           <p class="review-text">${review.review}</p>
       </div>`;
-  })
+  });
   return reviewHTML;
 }
 
 export function getReviewsStats(reviews) {
+  if (!Array.isArray(reviews)) {
+    console.error("Expected an array for reviews, but got: ", reviews);
+    return `
+    <div>
+        <p>Total Reviews: ${totalReviews}  |  Average Rating: ${averageReviewScore}✨</p>
+    </div>`;
+  }
+
   const totalReviews = reviews.length;
   const totalReviewScores = reviews.reduce(
     (total, review) => total + parseInt(review.rating),
@@ -41,5 +48,5 @@ export function getReviewsStats(reviews) {
 export function renderReviews(reviews, reviewList, reviewStats) {
   reviewStats.innerHTML = getReviewsStats(reviews);
   reviewList.innerHTML = getReviewsFeedHTML(reviews);
-  console.log("Reviews array after render:", reviews);
+  console.log("Rendered reviews:", reviews);
 }
