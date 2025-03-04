@@ -42,6 +42,10 @@ h3 {
   margin-bottom: 20px;
 }
 
+#form-input-container {
+  width: 90%;
+}
+
 button:hover {
   background-color: #0056b3;
 }
@@ -131,11 +135,12 @@ textarea {
 
 /* Filter Styles */
 #filter-container {
+  width: 50%;
   display: flex;
   align-items: center;
   gap: 20px;
   padding: 10px;
-  margin-bottom: 5px;
+  margin: 0 auto 5px;
 }
 
 /* Basic Responsive Design (adjust breakpoints as needed) */
